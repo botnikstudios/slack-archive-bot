@@ -17,6 +17,10 @@ cursor.execute('create table if not exists channels (name text, id text, UNIQUE(
 # This token is given when the bot is started in terminal
 slack_token = os.environ["SLACK_API_TOKEN"]
 
+# For when we get Oauth setup
+# client_id = os.environ["SLACK_CLIENT_ID"]
+# client_secret = os.environ["SLACK_CLIENT_SECRET"]
+
 # Makes bot user active on Slack
 # NOTE: terminal must be running for the bot to continue
 sc = SlackClient(slack_token)
@@ -194,7 +198,7 @@ def handle_query(event):
 def handle_message(event):
     if 'text' not in event:
         return
-    if 'username' in event and event['username'] == 'bot':
+    if 'username' in event and (event['username'] == 'bot' or event['username'] == 'Slack API Tester') :
         return
 
     try:
