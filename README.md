@@ -24,6 +24,12 @@ channel and get the API key. Start the bot with:
 
     Where API_TOKEN is the token you got when creating the bot user.
 
+    Alternatively, when running on a server, to make sure archivebot keeps running after logging out, use:
+	
+	export SLACK_API_TOKEN=<API_TOKEN> nohup python archivebot.py &
+
+See ./nohup.out for output.  Kill the process with `kill <pid>`
+
 ## Archiving New Messages
 
 When running, ArchiveBot will continue to archive new messages for any channel it

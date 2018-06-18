@@ -1,2 +1,4 @@
 export
 **.sqlite
+nohup.out
+.*
