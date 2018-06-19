@@ -20,13 +20,13 @@ on the directory.  For example:
 1. Create a new [bot user](https://api.slack.com/bot-users) on your slack
 channel and get the API key. Start the bot with:
 
-        export SLACK_API_TOKEN=<API_TOKEN> && python archivebot.py
+        export BOT_DI=<BOT_ID> BOT_CHANNEL_ID=<BOT_CHANNEL_ID> SLACK_API_TOKEN=<API_TOKEN> && python archivebot.py
 
     Where API_TOKEN is the token you got when creating the bot user.
 
     Alternatively, when running on a server, to make sure archivebot keeps running after logging out, use:
 	
-	export SLACK_API_TOKEN=<API_TOKEN> nohup python archivebot.py &
+	BOT_ID=<BOT_ID> BOT_CHANNEL_ID=<BOT_CHANNEL_ID> SLACK_API_TOKEN=<API_TOKEN> nohup python archivebot.py &
 
 See ./nohup.out for output.  Kill the process with `kill <pid>`
 

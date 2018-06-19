@@ -16,6 +16,8 @@ cursor.execute('create table if not exists channels (name text, id text, UNIQUE(
 
 # This token is given when the bot is started in terminal
 slack_token = os.environ["SLACK_API_TOKEN"]
+bot_id = os.environ["BOT_ID"]
+bot_channel_id = os.environ["BOT_CHANNEL_ID"]
 
 # For when we get Oauth setup
 # client_id = os.environ["SLACK_CLIENT_ID"]
@@ -24,6 +26,10 @@ slack_token = os.environ["SLACK_API_TOKEN"]
 # Makes bot user active on Slack
 # NOTE: terminal must be running for the bot to continue
 sc = SlackClient(slack_token)
+
+# This should be the bot user id, but it turns out to be mine!
+# bot_id = sc.api_call("auth.test")["user_id"]
+# print(bot_id)
 
 # Double naming for better search functionality
 # Keys are both the name and unique ID where needed
@@ -185,7 +191,7 @@ def handle_query(event):
         if res:
             print(res)
             send_message('\n'.join(
-                ['%s (@%s, %s, %s)' % (
+                ['%s \n ~(@%s, %s, %s)\n\n***\n\n' % (
                     i[0], get_user_name(i[1]), convert_timestamp(i[2]), '#'+get_channel_name(i[3])
                 ) for i in res if can_query_channel(i[3], event['user'])]
             ), event['channel'])
@@ -207,7 +213,7 @@ def handle_message(event):
         print("*"*20)
 
     # If it's a DM, treat it as a search query
-    if event['channel'][0] == 'D':
+    if (event['channel'] == bot_channel_id) or "@UB5BBGPEY" in event["text"]:
         handle_query(event)
     elif 'user' not in event:
         print("No valid user. Previous event not saved")
